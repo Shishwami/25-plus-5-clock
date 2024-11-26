@@ -71,7 +71,7 @@ function App() {
         setCurrentTime(newLength * 60);
         return newLength;
       });
-    } else {
+    } else if (!isRunning) {
       setSessionLength(1);
       setCurrentTime(60);
     }
@@ -86,25 +86,31 @@ function App() {
   };
 
   return (
-    <div>
-      <Control
-        controlName={phase.break}
-        defaultLength={breakLength}
-        increment={breakIncrement}
-        decrement={breakDecrement}
-      />
-      <Control
-        controlName={phase.session}
-        defaultLength={sessionLength}
-        increment={sessionIncrement}
-        decrement={sessionDecrement}
-      />
-      <Timer
-        currentPhase={currentPhase}
-        timeLeft={currentTime}
-        resetOnClick={reset}
-        startStopOnClick={toggleRunning}
-      />
+    <div className='App'>
+      <h1>25 + 5 Clock</h1>
+      <div className='Container'>
+        <Control
+          controlName={phase.break}
+          defaultLength={breakLength}
+          increment={breakIncrement}
+          decrement={breakDecrement}
+        />
+        <Control
+          controlName={phase.session}
+          defaultLength={sessionLength}
+          increment={sessionIncrement}
+          decrement={sessionDecrement}
+        />
+        <Timer
+          currentPhase={currentPhase}
+          timeLeft={currentTime}
+          resetOnClick={reset}
+          startStopOnClick={toggleRunning}
+          isRunning={isRunning}
+        />
+        <audio id='beep' src='./assests.beep.mp3'>asdasd</audio>
+      </div>
+      <p id='footer'>by <a href=''> <i className='fab fa-github'></i> Shishwami</a></p>
     </div>
   );
 }
