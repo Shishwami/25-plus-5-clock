@@ -1,4 +1,4 @@
-function Timer({ currentPhase, timeLeft, resetOnClick, startStopOnClick }) {
+function Timer({ currentPhase, timeLeft, resetOnClick, startStopOnClick, isRunning }) {
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -7,11 +7,19 @@ function Timer({ currentPhase, timeLeft, resetOnClick, startStopOnClick }) {
     };
 
     return (
-        <div className="timer">
+        <div id="timer">
             <p id="timer-label">{currentPhase}</p>
             <p id="time-left">{formatTime(timeLeft)}</p>
-            <button id="start_stop" onClick={startStopOnClick}></button>
-            <button id="reset" onClick={resetOnClick}></button>
+            <div className="btn-container">
+                <button id="start_stop" onClick={startStopOnClick}>
+                {
+                   isRunning? <i className="fas fa-pause icon"></i>:  <i className="fas fa-play icon"></i>
+
+                }
+                </button>
+                <button id="reset" onClick={resetOnClick}> <i className="fas fa-rotate-left icon"></i></button>
+            </div>
+
         </div>
     )
 }
