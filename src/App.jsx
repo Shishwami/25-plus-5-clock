@@ -9,6 +9,8 @@ function App() {
     break: "break"
   };
 
+  const beep = document.getElementById("beep");
+
   const defaultBreak = 5;
   const defaultSession = 25;
   const defaultPhase = phase.session;
@@ -23,7 +25,7 @@ function App() {
     if (isRunning) {
       const timer = setTimeout(() => {
         if (currentTime <= 0) {
-          document.getElementById("beep").play();
+          beep.play();
           setCurrentPhase(currentPhase === phase.session ? phase.break : phase.session);
           setCurrentTime(
             currentPhase === phase.session
@@ -79,6 +81,8 @@ function App() {
   };
 
   const reset = () => {
+    beep.pause();
+    beep.currentTime = 0;
     setIsRunning(false);
     setCurrentPhase(phase.session);
     setBreakLength(defaultBreak);
@@ -110,7 +114,6 @@ function App() {
           isRunning={isRunning}
         />
         <audio id='beep' src='./assets/beep.mp3'></audio>
-        <img src="./w3schools.jpg" alt=""  />
       </div>
       <p id='footer'>by <a href=''> <i className='fab fa-github'></i> Shishwami</a></p>
     </div>
