@@ -1,4 +1,4 @@
-function Control({ controlName, defaultLength }) {
+function Control({ controlName, defaultLength,increment,decrement }) {
     
     const newName = controlName.charAt(0).toUpperCase() + controlName.slice(1).toLowerCase();
 
@@ -8,9 +8,9 @@ function Control({ controlName, defaultLength }) {
                 <p id={controlName + "-label"}>{newName} Length</p>
             </div>
             <div>
-                <button id={controlName + "-decrement"}></button>
+                <button id={controlName + "-decrement"} onClick={decrement}></button>
                 <p id={controlName + "-length"}>{defaultLength}</p>
-                <button id={controlName + "-increment"}></button>
+                <button id={controlName + "-increment"} onClick={increment}></button>
             </div>
         </div>
     );
