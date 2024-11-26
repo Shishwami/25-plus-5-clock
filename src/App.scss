@@ -1,3 +1,114 @@
-body,html{
+body,
+html {
     box-sizing: 0;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    // outline: 1px solid red;
+}
+
+
+
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    font-size: 20px;
+    padding: 15px 5px;
+    margin: 20px;
+
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px 10px rgba(0, 0, 0, 0.5);
+
+    width: 100%;
+    max-width: 700px;
+    min-width: 300px;
+
+    .controls {
+        margin: 10px 20px;
+
+        p {
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    }
+
+    .control-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            font-size: 25px;
+        }
+    }
+
+    button {
+        height: 50px;
+        width: 50px;
+        margin: 10px 20px;
+        border-radius: 5px;
+
+        i {
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+
+    #timer {
+        grid-column: span 2;
+        margin: 10px 20px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        outline: 2px solid lightgray;
+        border-radius: 10px;
+
+        p {
+            margin: 15px 10px;
+        }
+
+        .btn-container {
+            display: flex;
+            width: 100%;
+
+            justify-content: center;
+        }
+
+        #timer-label {
+            font-size: 30px;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        #time-left {
+            font-size: 50px;
+            font-weight: 700;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .Container{
+        display: flex;
+        flex-direction: column;
+    }
 }
