@@ -23,17 +23,17 @@ function App() {
   useEffect(() => {
     if (isRunning) {
       const timer = setTimeout(() => {
-        console.log("Tick");
 
         if (currentTime <= 0) {
           setCurrentPhase(
             currentPhase === phase.session ? phase.break : phase.session
+            
           );
 
           setCurrentTime(
             currentPhase === phase.session
-              ? (breakLength * 60) + 2
-              : (sessionLength * 60) + 2
+              ? (breakLength * 60)
+              : (sessionLength * 60) 
           );
 
           // Play audio 
@@ -76,15 +76,19 @@ function App() {
         setCurrentTime(newLength * 60);
         return newLength;
       });
+    }else{
+      setSessionLength(1);
+      setCurrentTime(60);
     }
   }
 
   const reset = () => {
+    setIsRunning(false);
+
     setCurrentPhase(phase.session);
     setBreakLength(defaultBreak);
     setSessionLength(defaultSession);
-    setCurrentTime(sessionLength * 60);
-    setIsRunning(false);
+    setCurrentTime(defaultSession * 60);
   }
 
   return (
