@@ -23,6 +23,7 @@ function App() {
     if (isRunning) {
       const timer = setTimeout(() => {
         if (currentTime <= 0) {
+          document.getElementById("beep").play();
           setCurrentPhase(currentPhase === phase.session ? phase.break : phase.session);
           setCurrentTime(
             currentPhase === phase.session
@@ -108,7 +109,8 @@ function App() {
           startStopOnClick={toggleRunning}
           isRunning={isRunning}
         />
-        <audio id='beep' src='./assests.beep.mp3'>asdasd</audio>
+        <audio id='beep' src='./assets/beep.mp3'></audio>
+        <img src="./w3schools.jpg" alt=""  />
       </div>
       <p id='footer'>by <a href=''> <i className='fab fa-github'></i> Shishwami</a></p>
     </div>
