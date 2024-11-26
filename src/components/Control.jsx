@@ -1,16 +1,14 @@
-function Control({ controlName, defaultLength,increment,decrement }) {
-    
-    const newName = controlName.charAt(0).toUpperCase() + controlName.slice(1).toLowerCase();
+function Control({ controlName, defaultLength, increment, decrement }) {
 
     return (
-        <div className={controlName}>
+        <div className={controlName + " controls"} id={controlName}>
             <div>
-                <p id={controlName + "-label"}>{newName} Length</p>
+                <p id={controlName + "-label"}>{controlName} Length</p>
             </div>
-            <div>
-                <button id={controlName + "-decrement"} onClick={decrement}></button>
+            <div className="control-container">
+                <button id={controlName + "-decrement"} onClick={decrement}><i className="fas fa-arrow-down icon"></i></button>
                 <p id={controlName + "-length"}>{defaultLength}</p>
-                <button id={controlName + "-increment"} onClick={increment}></button>
+                <button id={controlName + "-increment"} onClick={increment}><i className="fas fa-arrow-up icon"></i></button>
             </div>
         </div>
     );
