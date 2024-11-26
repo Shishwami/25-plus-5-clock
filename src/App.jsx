@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
-import Control from './components/control'
+import { useEffect, useState } from 'react';
+import Control from './components/control';
 import Timer from './components/Timer';
-import './App.css'
+import './App.css';
 
 function App() {
-
   const phase = {
     session: "session",
     break: "break"
@@ -23,20 +22,13 @@ function App() {
   useEffect(() => {
     if (isRunning) {
       const timer = setTimeout(() => {
-
         if (currentTime <= 0) {
-          setCurrentPhase(
-            currentPhase === phase.session ? phase.break : phase.session
-            
-          );
-
+          setCurrentPhase(currentPhase === phase.session ? phase.break : phase.session);
           setCurrentTime(
             currentPhase === phase.session
-              ? (breakLength * 60)
-              : (sessionLength * 60) 
+              ? breakLength * 60
+              : sessionLength * 60
           );
-
-          // Play audio 
         } else {
           setCurrentTime(prevTime => prevTime - 1);
         }
@@ -46,20 +38,22 @@ function App() {
     }
   }, [isRunning, currentTime, currentPhase, sessionLength, breakLength]);
 
-  const toggleRunnning = () => {
+  const toggleRunning = () => {
     setIsRunning(!isRunning);
-  }
+  };
 
   const breakIncrement = () => {
     if (breakLength < 60 && !isRunning) {
-      setBreakLength(breakLength + 1)
+      setBreakLength(prevLength => prevLength + 1);
     }
-  }
+  };
+
   const breakDecrement = () => {
     if (breakLength > 1 && !isRunning) {
-      setBreakLength(breakLength - 1)
+      setBreakLength(prevLength => prevLength - 1);
     }
-  }
+  };
+
   const sessionIncrement = () => {
     if (sessionLength < 60 && !isRunning) {
       setSessionLength(prevLength => {
@@ -68,7 +62,8 @@ function App() {
         return newLength;
       });
     }
-  }
+  };
+
   const sessionDecrement = () => {
     if (sessionLength > 1 && !isRunning) {
       setSessionLength(prevLength => {
@@ -76,28 +71,42 @@ function App() {
         setCurrentTime(newLength * 60);
         return newLength;
       });
-    }else{
+    } else {
       setSessionLength(1);
       setCurrentTime(60);
     }
-  }
+  };
 
   const reset = () => {
     setIsRunning(false);
-
     setCurrentPhase(phase.session);
     setBreakLength(defaultBreak);
     setSessionLength(defaultSession);
     setCurrentTime(defaultSession * 60);
-  }
+  };
 
   return (
     <div>
-      <Control controlName={phase.break} defaultLength={breakLength} increment={breakIncrement} decrement={breakDecrement}></Control>
-      <Control controlName={phase.session} defaultLength={sessionLength} increment={sessionIncrement} decrement={sessionDecrement}></Control>
-      <Timer currentPhase={currentPhase} timeLeft={currentTime} resetOnClick={reset} startStopOnClick={toggleRunnning}></Timer>
+      <Control
+        controlName={phase.break}
+        defaultLength={breakLength}
+        increment={breakIncrement}
+        decrement={breakDecrement}
+      />
+      <Control
+        controlName={phase.session}
+        defaultLength={sessionLength}
+        increment={sessionIncrement}
+        decrement={sessionDecrement}
+      />
+      <Timer
+        currentPhase={currentPhase}
+        timeLeft={currentTime}
+        resetOnClick={reset}
+        startStopOnClick={toggleRunning}
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
