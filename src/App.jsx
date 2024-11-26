@@ -6,58 +6,70 @@ import './App.css'
 function App() {
 
   const phase = {
-    session: "Session",
-    break: "Break"
+    session: "session",
+    break: "break"
   };
 
   const defaultBreak = 5;
   const defaultSession = 25;
   const defaultPhase = phase.session;
 
-  const [breakLength, setBreakLength] = useState(1);
-  const [sessionLength, setSessionLength] = useState(1);
+  const [breakLength, setBreakLength] = useState(defaultBreak);
+  const [sessionLength, setSessionLength] = useState(defaultSession);
   const [currentPhase, setCurrentPhase] = useState(defaultPhase);
   const [currentTime, setCurrentTime] = useState(sessionLength * 60);
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let interval;
-
     if (isRunning) {
-      interval = setInterval(() => {
-        setCurrentTime(prevTime => {
-          console.log(prevTime);
+      setTimeout(() => {
+        console.log("Tick");
+        if (currentTime <= 0) {
+          setCurrentPhase(currentPhase === phase.session ? phase.break : phase.session);
+          setCurrentTime(currentPhase === phase.session ? (breakLength * 60) + 2 : (sessionLength * 60) + 2);
+          //play audio
+        } else {
+          setCurrentTime(currentTime - 1);
+        }
 
-          if (prevTime <= 0) {
-            clearInterval(interval);
-            return 0;
-          }
-          return prevTime - 1;
-        });
       }, 1000);
-    } else {
-      clearInterval(interval);
     }
-
-    return () => clearInterval(interval);
-  }, [isRunning]);
+  });
 
   const toggleRunnning = () => {
     setIsRunning(!isRunning);
+  }
+
+  const breakIncrement = () => {
+    if (breakLength <= 60) {
+      setBreakLength(breakLength + 1)
+    }
+  }
+  const breakDecrement = () => {
+    if (breakLength >= 0) {
+      setBreakLength(breakLength - 1)
+    }
+  }
+  const sessionIncrement = () => {
+
+  }
+  const sessionDecrement = () => {
+
   }
 
   const reset = () => {
     setCurrentPhase(phase.session);
     setBreakLength(defaultBreak);
     setSessionLength(defaultSession);
+    setIsRunning(false);
     setCurrentTime(0);
   }
 
   return (
     <div>
-      <Control controlName={"break"} defaultLength={breakLength}></Control>
-      <Control controlName={"session"} defaultLength={sessionLength}></Control>
-      <Timer currentPhase={currentPhase} timeLeft={currentTime} resetOnClick={reset}></Timer>
+      <Control controlName={phase.break} defaultLength={breakLength} increment={breakIncrement} decrement={breakDecrement}></Control>
+      <Control controlName={phase.session} defaultLength={sessionLength}></Control>
+      <Timer currentPhase={currentPhase} timeLeft={currentTime} resetOnClick={reset} startStopOnClick={toggleRunnning}></Timer>
     </div>
   )
 }
