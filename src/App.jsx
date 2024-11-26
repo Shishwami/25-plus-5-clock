@@ -4,11 +4,13 @@ import './App.css'
 
 function App() {
 
+  const defaultBreak=5;
+  const defaultSession=25;
 
   return (
     <div>
-      <Control controlName={"break"}></Control>
-      <Control controlName={"session"}></Control>
+      <Control controlName={"break"} defaultLength={defaultBreak}></Control>
+      <Control controlName={"session"} defaultLength={defaultSession}></Control>
     </div>
   )
 }
