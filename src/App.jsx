@@ -115,7 +115,7 @@ function App() {
         />
         <audio id='beep' src='./assets/beep.mp3'></audio>
       </div>
-      <p id='footer'>by <a href=''> <i className='fab fa-github'></i> Shishwami</a></p>
+      <p id='footer'>by <a href='https://github.com/Shishwami'> <i className='fab fa-github'></i> Shishwami</a></p>
     </div>
   );
 }
